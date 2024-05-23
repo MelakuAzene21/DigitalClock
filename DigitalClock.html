@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>digital clock</title>
+    <style>
+        body{
+            background-color: darkslategray;
+        }
+        .container{
+            width:200px;
+            height: 25vh;
+            background-color: darkgrey;
+            position:absolute;
+            top: 40%;
+            left: 40%;
+        }
+        #timer{
+         text-align: center;
+         margin-right: 8px;
+         position:absolute;
+            top: 45%;
+            left:35%;
+         justify-content: center;
+         align-items: center;
+         font-size: 1.5em;
+         font-weight: 600;
+        }
+        h1{
+            position: absolute;
+            top: 25%;
+            left:40%;
+            font-weight: 600;
+            color:chartreuse;
+        }
+      
+    </style>
+</head>
+<body onload="Start();">
+    <h1>Digital Clock</h2>
+  <div class="container">
+    
+    <div id="timer">
+    00:00:00
+    </div>
+  </div> 
+  <script>
+  //let hrs=0,mints=0,secs=0;
+let today=new Date();
+let hrs=today.getHours();
+let mints=today.getMinutes();
+let secs=today.getSeconds();
+
+let timing=null;
+ const nowtime = document.getElementById("timer");
+  
+function DigitalTime(){
+    secs++;
+    if (secs > 60) {
+        secs = 0;
+        mints++;
+  if (mints > 60) {
+        mints = 0;
+        hrs++;
+        if (hrs > 12) {
+          hrs = 1;
+      }
+    }  
+} 
+   let hr=hrs<10?"0"+hrs:hrs;
+   let min = mints < 10 ? "0" + mints : mints;
+   let sec = secs < 10 ? "0" + secs : secs;
+
+    nowtime.innerHTML = hr+ ":" + min + ":" + sec;
+}
+
+    function Start() {
+        if (timing !== null) {
+            clearInterval(timing);
+        }
+        timing = setInterval(DigitalTime, 1000);
+    }
+    
+  </script> 
+</body>
+</html>
